@@ -1,0 +1,42 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>如何利用Charles进行抓包 | 海洋Lisle</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/8.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">如何利用Charles进行抓包</h1><a id="logo" href="/.">海洋Lisle</a><p class="description">大道至简，知易行难</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">如何利用Charles进行抓包</h1><div class="post-meta">Aug 16, 2018</div><div class="post-content"><p>Charles作为一款抓包工具，在web调试，尤其是移动端的调试过程中意义重大。下面对它的使用流程做个记录，方便后续查阅。</p>
+<h2 id="一-在PC-Mac-上抓包"><a href="#一-在PC-Mac-上抓包" class="headerlink" title="一. 在PC(Mac)上抓包"></a>一. 在PC(Mac)上抓包</h2><ol>
+<li>打开菜单栏，选择“Proxy”，勾选“Starting Recording”和“Mac OS X Proxy”</li>
+</ol>
+<p><img src="https://i.loli.net/2018/08/16/5b7527d9732e1.png" alt=""></p>
+<ol start="2">
+<li><p>打开系统偏好设置-网络-高级-代理；勾选“网络代理（HTTP）”和“安全网络代理（HTTPS）”,并设置网络代理服务器为<code>127.0.0.1:8888</code>（每次开完vpn以后这一项都得重新设置）。这样可以同时抓包http和https的请求。<br><img src="https://i.loli.net/2018/08/16/5b75269f9a8a9.png" alt=""></p>
+</li>
+<li><p>抓包成功。</p>
+</li>
+</ol>
+<h2 id="二-移动端http请求抓包"><a href="#二-移动端http请求抓包" class="headerlink" title="二. 移动端http请求抓包"></a>二. 移动端http请求抓包</h2><ol>
+<li>在mac端charles内的设置:打开菜单栏，选择“Proxy-Proxy Settings”,设置端口，并勾选“Enable transparent HTTP proxying”</li>
+</ol>
+<p><img src="https://i.loli.net/2018/08/16/5b752761db3d1.png" alt=""></p>
+<ol start="2">
+<li>获取本机IP地址。打开”Help-Local IP Address”,即显示本机IP。</li>
+</ol>
+<p><img src="https://i.loli.net/2018/08/20/5b7a54b2835c2.png" alt=""></p>
+<ol start="3">
+<li><p>将手机与电脑连接至同一局域网。</p>
+</li>
+<li><p>点开手机当前连接网络的网络设置，修改代理方式为“手动”，并填写第一步设置的端口与第二步获取的IP。<br><img src="https://i.loli.net/2018/08/20/5b7a58ad317d7.jpg" alt=""></p>
+</li>
+<li><p>点击确定，代理成功。</p>
+</li>
+</ol>
+<h2 id="三-移动端https抓包"><a href="#三-移动端https抓包" class="headerlink" title="三. 移动端https抓包"></a>三. 移动端https抓包</h2><p>上一步完成后，我们会发现抓取的都是http的包，https的请求是抓取不到的。此时需要安装移动端设备安装 Charles 的 CA 证书</p>
+<p>以下以小米5为例。</p>
+<ol>
+<li><p>点击’Help-SSL Proxying-Install Charles Root Certificate on a Mobile Device or Remote Browser’;<br><img src="https://i.loli.net/2018/08/20/5b7a5b9ba8a78.png" alt=""><br><img src="https://i.loli.net/2018/08/20/5b7a5b701db42.png" alt=""></p>
+</li>
+<li><p>手机完成之前http的操作</p>
+</li>
+<li><p>PC浏览器打开<code>http://www.charlesproxy.com/getssl/</code>,浏览器自动下载<code>charles-proxy-ssl-proxying-certificate.pem</code></p>
+</li>
+<li><p>传送到手机。设置 &gt; 更多设置(系统和设备) &gt; 系统安全 &gt; 加密与凭据 &gt; 从存储设备安装。安装证书。</p>
+</li>
+<li><p>此时可以抓取了。但是默认情况下 Charles 并不做截取，你还需要在要截取的网络请求上右击，选择 SSL proxy 菜单项。<br><img src="https://i.loli.net/2018/08/20/5b7a6265b0561.png" alt=""><br><img src="https://i.loli.net/2018/08/20/5b7a61ce17268.png" alt=""></p>
+</li>
+</ol>
+</div><div class="tags"><a href="/tags/开发工具/">开发工具</a></div><div class="post-nav"><a class="next" href="/2018/08/15/关于Promise我的理解/">关于Promise我的理解</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/es6/" style="font-size: 15px;">es6</a> <a href="/tags/前端架构/" style="font-size: 15px;">前端架构</a> <a href="/tags/性能优化/" style="font-size: 15px;">性能优化</a> <a href="/tags/开发工具/" style="font-size: 15px;">开发工具</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/08/16/如何利用Charles进行抓包/">如何利用Charles进行抓包</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/15/关于Promise我的理解/">关于Promise我的理解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/兼容低版本浏览器情况下的前端功能化方案探究/">兼容低版本浏览器情况下的前端工程化化方案探究</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/css居中完全指南/">css居中完全指南(译文)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/css3实现3d方块旋转/">css3实现3d方块旋转</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/16/缓存优化效果实测记录/">缓存优化效果实测记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/28/javascript各类排序算法的实现/">javascript各类排序算法的实现</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 链接</i></div><ul></ul><a href="https://github.com/lisleyang" title="我的github" target="_blank">我的github</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2018 <a href="/." rel="nofollow">海洋Lisle.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.css"><script type="text/javascript" color="0,0,0" opacity="0.5" zIndex="-2" count="50" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

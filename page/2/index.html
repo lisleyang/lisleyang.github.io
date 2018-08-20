@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>海洋Lisle | 大道至简，知易行难</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/8.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">海洋Lisle</h1><a id="logo" href="/.">海洋Lisle</a><p class="description">大道至简，知易行难</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title"><a href="/2017/08/15/css居中完全指南/">css居中完全指南(译文)</a></h1><div class="post-meta">2017-08-15</div><div class="post-content"><p style="background-color: #ddd;padding: 16px;"><span>本文译自<a href="https://css-tricks.com/centering-css-complete-guide/" target="_blank" rel="noopener">https://css-tricks.com/centering-css-complete-guide/</a> , 讲述了如何利用 css 来实现常见的水平和垂直居中。</span></p>
+
+<p>人们一直都在抱怨CSS的设计者们，为什么一定要把一个简简单单的居中设计的如此困难。但我认为居中问题并不在于有多难，而是在于居中的使用场景非常多，对应到每种场景下的使用方法也因此各不相同。</p>
+<p>那么接下来让我们来制作一个决策树，用来讲清楚什么情况下你应该使用什么方法来实现居中。希望它能有所帮助。</p></div><p class="readmore"><a href="/2017/08/15/css居中完全指南/">阅读全文</a></p></div><div class="post"><h1 class="post-title"><a href="/2017/08/07/css3实现3d方块旋转/">css3实现3d方块旋转</a></h1><div class="post-meta">2017-08-07</div><div class="post-content"><p>如果对css-3d部分的基础知识不清楚，请参考<a href="http://acgtofe.com/posts/2013/09/css-3d-transform" target="_blank" rel="noopener">http://acgtofe.com/posts/2013/09/css-3d-transform</a>以及<a href="http://acgtofe.com/posts/2015/12/xyz-3d-in-css" target="_blank" rel="noopener">http://acgtofe.com/posts/2015/12/xyz-3d-in-css</a></p>
+<div class="view"><div class="box"><div class="one">A</div><div class="two">B</div><div class="three">C</div><div class="four">D</div><div class="five">E</div><div class="six">F</div></div>
+
+<p></p></div><p></p>
+<style>
+    .view{
+        margin: 80px auto;
+        width: 160px;
+        height: 160px;
+        /* perspective : 800px; */
+    }
+    .box{
+        width: 160px;
+        position:relative;
+        transform-style: preserve-3d;
+                transform-origin: 80px 80px 0;
+                transform: rotateX(20deg);
+
+                animation-name: animation;
+                animation-duration: 10s;
+                animation-timing-function: ease-in-out;
+                animation-iteration-count:infinite;
+    }
+    .box div{
+        position: absolute;
+        width: 160px;
+        height: 160px;
+        background: rgba(255,200,100,0.4);
+        line-height: 160px;
+        text-align: center;
+        font-size: 130px;
+        border: 1px solid #000; 
+    }
+
+    .one{
+        transform: translateZ(80px);
+    } 
+    .two{
+        /*bottom*/
+        transform: rotateX(-90deg) translateZ(80px);
+    }
+    .three {
+        /*top*/
+        transform: rotateX(90deg) translateZ(80px);
+    }
+    .four{
+        transform: rotateX(180deg) translateZ(80px);
+    }
+    .five{
+        transform: rotateY(-90deg) translateZ(80px)
+    }
+    .six{
+        transform: rotateY(90deg) translateZ(80px)
+    }
+
+    @-webkit-keyframes animation
+    {
+        from,to{}
+        16% { -webkit-transform: rotateY(-90deg);}
+        33% { -webkit-transform: rotateY(-90deg) rotateZ(135deg);}
+        50% { -webkit-transform: rotateY(225deg) rotateZ(135deg);}
+        66% { -webkit-transform: rotateY(135deg) rotateX(135deg);}
+        83% { -webkit-transform: rotateX(135deg);}
+    }
+</style></div><p class="readmore"><a href="/2017/08/07/css3实现3d方块旋转/">阅读全文</a></p></div><div class="post"><h1 class="post-title"><a href="/2016/08/16/缓存优化效果实测记录/">缓存优化效果实测记录</a></h1><div class="post-meta">2016-08-16</div><div class="post-content"><h2 id="一-浏览器的缓存机制"><a href="#一-浏览器的缓存机制" class="headerlink" title="一.浏览器的缓存机制"></a><strong>一.浏览器的缓存机制</strong></h2><p>缓存是做web优化的过程中始终绕不开的一个话题，因为优化的重头戏就是资源的加载速度；如果能直接使用缓存，就可以避免向服务器请求及加载资源，极大的减少下载文件的大小及个数，在性能的优化上会体现的非常明显。</p>
+<p>客户端的缓存原理如下图所示：</p>
+<p><img src="http://7xqgvd.com1.z0.glb.clouddn.com/%E7%BC%93%E5%AD%98%E5%8E%9F%E7%90%86%E5%9B%BE.png" alt=""></p>
+<p>浏览器在首次进行请求的时候，此时还没有缓存；服务器接收到请求后，会在响应头加上Etag值，用以标识文件是否变化；而当浏览器再次请求相同资源的时候，会将上次响应头中的Etag值放到请求头中；而服务器再次接收到请求以后，会根据回传的If-None-Match以及If-Modified-Since字段进行判断，如果文件没有变化，就直接返回304而不是完整的资源，从而优化加载速度；这就是浏览器缓存的基本工作方式；</p></div><p class="readmore"><a href="/2016/08/16/缓存优化效果实测记录/">阅读全文</a></p></div><nav class="page-navigator"><a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">下一页</a></nav></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/es6/" style="font-size: 15px;">es6</a> <a href="/tags/前端架构/" style="font-size: 15px;">前端架构</a> <a href="/tags/性能优化/" style="font-size: 15px;">性能优化</a> <a href="/tags/开发工具/" style="font-size: 15px;">开发工具</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/08/16/如何利用Charles进行抓包/">如何利用Charles进行抓包</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/15/关于Promise我的理解/">关于Promise我的理解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/兼容低版本浏览器情况下的前端功能化方案探究/">兼容低版本浏览器情况下的前端工程化化方案探究</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/15/css居中完全指南/">css居中完全指南(译文)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/css3实现3d方块旋转/">css3实现3d方块旋转</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/16/缓存优化效果实测记录/">缓存优化效果实测记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/28/javascript各类排序算法的实现/">javascript各类排序算法的实现</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 链接</i></div><ul></ul><a href="https://github.com/lisleyang" title="我的github" target="_blank">我的github</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2018 <a href="/." rel="nofollow">海洋Lisle.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.css"><script type="text/javascript" color="0,0,0" opacity="0.5" zIndex="-2" count="50" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
