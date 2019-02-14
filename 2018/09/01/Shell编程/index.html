@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>Shell学习笔记 | 海洋Lisle</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/8.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Shell学习笔记</h1><a id="logo" href="/.">海洋Lisle</a><p class="description">大道至简，知易行难</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Shell学习笔记</h1><div class="post-meta">Sep 1, 2018</div><div class="post-content"><p>本文主要是Shell学习过程中的一些记录，方便后续使用。</p>
+<h2 id="1-Shell概述"><a href="#1-Shell概述" class="headerlink" title="1. Shell概述"></a>1. Shell概述</h2><h3 id="Shell是什么"><a href="#Shell是什么" class="headerlink" title="Shell是什么"></a>Shell是什么</h3><ul>
+<li>shell是一个<strong>命令行解释器</strong>，也就是操作界面。它为用户提供了一个向Linux内核发送请求以便运行程序的界面系统级程序。</li>
+<li>shell还是一个功能强大的<strong>编程语言</strong>。shell是解释执行的脚本语言，在shell中可以直接调用Linux系统级命令。</li>
+</ul>
+<h3 id="Shell的分类"><a href="#Shell的分类" class="headerlink" title="Shell的分类"></a>Shell的分类</h3><p>Shell的两种语法类型有Bourne Shell和C Shell。</p>
+<ul>
+<li>Bourne Shell: 1979年起Unix中使用，主文件名为sh；</li>
+<li>C Shell ： 主要在BSD版本的Unix中使用，其语法与C语言类似而得名。</li>
+</ul>
+<p>Bourne Shell家族主要包括 sh , ksh , Bash , psh , zsh;C家族（主要给unix使用）主要包括csh,tcsh。<strong>Bash是Linux中的标准Shell。</strong></p>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><ul>
+<li><p>查看Shell版本: <code>echo $SHELL</code>  ($的意思是变量，SHELL是变量名字)</p>
+</li>
+<li><p>查看Linux支持的Shell ： <code>vi /etc/shells</code></p>
+</li>
+<li><p>切换Shell ： <code>sh</code> / <code>bash</code> / <code>csh</code>。退出<code>exit</code>。</p>
+</li>
+<li><p>新建文件 ： <code>touch hello.sh</code></p>
+</li>
+<li><p>新建文件夹 : <code>mkdir testmdic</code></p>
+</li>
+<li><p>查看文件 ： <code>cat hello.sh</code></p>
+</li>
+<li><p>复制 ：<code>cp</code></p>
+</li>
+<li>粘贴 :  <code>mv</code></li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>查看系统中已经生效的别名 ： <code>alias</code></p>
+</li>
+<li><p>设置别名:  <code>alias ll=&#39;ls -l --color=auto&#39;</code>(重启后失效)</p>
+</li>
+<li>永久改变别名，需修改环境变量配置文件 <code>vi ~/.bashrc</code>（对每个用户单独生效）(需重新登录，不想重新登录执行<code>source .bashrc</code>)</li>
+<li>删除别名 <code>unalias 别名</code>        (临时删除)</li>
+</ul>
+<h3 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h3><ul>
+<li><code>ctrl+u</code> ：从光标所在行删到行首</li>
+<li><code>ctrl+a</code> ：光标移到行首</li>
+<li><code>ctrl+e</code> ：光标移到行尾</li>
+<li><code>ctrl+r</code> :  历史命令中搜索</li>
+</ul>
+<h2 id="脚本执行方式"><a href="#脚本执行方式" class="headerlink" title="脚本执行方式"></a>脚本执行方式</h2><h3 id="vi-vim基本用法"><a href="#vi-vim基本用法" class="headerlink" title="vi/vim基本用法"></a>vi/vim基本用法</h3><p>vi/vim 共分为三种模式，分别是<strong>命令模式（Command mode）</strong>，<strong>输入模式（Insert mode）</strong>和<strong>底线命令模式（Last line mode）</strong>。 这三种模式的作用分别是：</p>
+<h4 id="命令模式："><a href="#命令模式：" class="headerlink" title="命令模式："></a>命令模式：</h4><p>用户刚刚启动 vi/vim，便进入了命令模式。</p>
+<p>此状态下敲击键盘动作会被Vim识别为命令，而非输入字符。比如我们此时按下i，并不会输入一个字符，i被当作了一个命令。</p>
+<p>以下是常用的几个命令：</p>
+<ul>
+<li><strong>i</strong> 切换到输入模式，以输入字符。</li>
+<li><strong>x</strong> 删除当前光标所在处的字符。</li>
+<li><strong>:</strong> 切换到底线命令模式，以在最底一行输入命令。</li>
+</ul>
+<h4 id="输入模式"><a href="#输入模式" class="headerlink" title="输入模式"></a>输入模式</h4><p>在命令模式下按下i就进入了输入模式。光标移到行尾，按ESC键可随时退出输入模式。</p>
+<h4 id="底线命令模式"><a href="#底线命令模式" class="headerlink" title="底线命令模式"></a>底线命令模式</h4><p>在命令模式下按下:（英文冒号）就进入了底线命令模式。</p>
+<p>在底线命令模式中，基本的命令有（已经省略了冒号）：</p>
+<ul>
+<li>q 退出程序</li>
+<li>w 保存文件</li>
+</ul>
+<h3 id="脚本执行"><a href="#脚本执行" class="headerlink" title="脚本执行"></a>脚本执行</h3><p>执行脚本有两种方式</p>
+<h4 id="1-赋予执行权限，直接运行-常用"><a href="#1-赋予执行权限，直接运行-常用" class="headerlink" title="1. 赋予执行权限，直接运行(常用)"></a>1. 赋予执行权限，直接运行(常用)</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>755=&gt;111 101 101 </span><br><span class="line"><span class="meta">#</span>对应所有者 所属组 其他人的 rwx 读/写/执行权限</span><br><span class="line">chmod 755 hello.sh</span><br><span class="line">./hello.sh</span><br></pre></td></tr></table></figure>
+<h4 id="2-通过Bash调用执行脚本"><a href="#2-通过Bash调用执行脚本" class="headerlink" title="2. 通过Bash调用执行脚本"></a>2. 通过Bash调用执行脚本</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash hello.sh</span><br></pre></td></tr></table></figure>
+<h2 id="Bash的基本功能"><a href="#Bash的基本功能" class="headerlink" title="Bash的基本功能"></a>Bash的基本功能</h2><h3 id="命令别名与快捷键"><a href="#命令别名与快捷键" class="headerlink" title="命令别名与快捷键"></a>命令别名与快捷键</h3><p>查看系统中已经生效的别名 ： <code>alias</code></p>
+<p>设置别名:  <code>alias ll=&#39;ls -l --color=auto&#39;</code></p>
+</div><div class="tags"></div><div class="post-nav"><a class="pre" href="/2018/09/17/在命令行中打开vscode和sublime/">在命令行中打开vscode和sublime</a><a class="next" href="/2018/08/21/learning Typescript中文版学习笔记/">《learning Typescript中文版》学习笔记</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/es6/" style="font-size: 15px;">es6</a> <a href="/tags/前端架构/" style="font-size: 15px;">前端架构</a> <a href="/tags/开发工具/" style="font-size: 15px;">开发工具</a> <a href="/tags/性能优化/" style="font-size: 15px;">性能优化</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/02/14/关于Typescript-jQuery声明文件的主要结构/">关于Typescript:jQuery声明文件的主要结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/14/typescript的接口（interface）/">typescript的接口（interface）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/21/几句话讲清楚节流和防抖/">几句话讲清楚节流和防抖</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/20/几句话讲清楚javascript原型/">几句话讲清楚javascript原型</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/20/几句话讲清楚缓存/">几句话讲清楚浏览器缓存</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/11/如何使用eslint/">如何使用eslint</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/17/在命令行中打开vscode和sublime/">在命令行中打开vscode和sublime</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/Shell编程/">Shell学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/learning Typescript中文版学习笔记/">《learning Typescript中文版》学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/16/如何利用Charles进行抓包/">如何利用Charles进行抓包</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 链接</i></div><ul></ul><a href="https://github.com/lisleyang" title="我的github" target="_blank">我的github</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2019 <a href="/." rel="nofollow">海洋Lisle.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.css"><script type="text/javascript" color="0,0,0" opacity="0.5" zIndex="-2" count="50" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
